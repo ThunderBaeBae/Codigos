@@ -3,7 +3,7 @@ using UnityEngine;
 public class ClickManager : MonoBehaviour
 {
     public int vidaJugador = 3;
-    public GameObject[] objetosValidos; // Lista de objetos a los que se puede hacer clic
+    public GameObject[] objetosValidos;
 
     void Update()
     {
@@ -15,7 +15,7 @@ public class ClickManager : MonoBehaviour
             if (col != null && EsObjetoValido(col.gameObject))
             {
                 Debug.Log("¡Click correcto en: " + col.gameObject.name + "!");
-                // Aquí puedes reducir vida del objeto si quieres
+                // Puedes hacer algo aquí como restar vida al objeto
             }
             else
             {
@@ -29,7 +29,12 @@ public class ClickManager : MonoBehaviour
     {
         foreach (GameObject valido in objetosValidos)
         {
+            // Comparamos por instancia exacta
             if (obj == valido)
+                return true;
+
+            // O comparamos si es hijo de uno de los válidos
+            if (obj.transform.IsChildOf(valido.transform))
                 return true;
         }
         return false;
