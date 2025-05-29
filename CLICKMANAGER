@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ClickManager : MonoBehaviour
+{
+    public int vidaJugador = 3;
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) 
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Collider2D col = Physics2D.OverlapPoint(mousePos);
+
+            if (col != null)
+            {
+                IDañable dañable = col.GetComponent<IDañable>();
+                if (dañable != null)
+                {
+                    dañable.RecibirDaño();
+                    return;
+                }
+            }
+
+          
+            vidaJugador--;
+            
+        }
+    }
+}
