@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class PatoMove : MonoBehaviour, IDañable
+{
+    public Rigidbody2D RB;
+    public int Vida = 3;
+    public float Speed = 2f;
+    public float Direccion = 1f;
+
+    public virtual void RecibirDaño()
+    {
+        Vida--;
+        if (Vida <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public virtual void Update()
+    {
+        transform.Translate(Vector3.right * Speed * Direccion * Time.deltaTime);
+    }
+}
